@@ -68,9 +68,15 @@ export class VideogamesController {
 
   deleteVideogamesByid = (req: Request, res: Response): void => {
     const { id } = req.params;
-
-    res.status(204).json({
-      message: `Video Game ${id} deleted`,
-    });
+    if(isNaN(+id)){
+     res.status(400).json({'ID not a Number'})
+    }
+    this.videogameService.deleteVideogame(+id)
+    .then(() => {
+      return res.status(204).json()
+    })
+    .catch((error: any) => {
+      return res.status(500).json(error)
+    })
   };
 }

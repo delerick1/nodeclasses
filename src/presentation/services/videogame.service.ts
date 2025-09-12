@@ -64,4 +64,15 @@ export class VideogameService {
         
         
     }
+    async deleteVideogame(id: number){
+      const videogame = await  this.findOneVideogameById(id)
+      videogame.status = Status.INACTIVE //soft delete
+      // videogame.remove() delete permanate
+      try{
+        await videogame.save()
+        return;
+      }catch(error){
+
+      }
+    }
 }
