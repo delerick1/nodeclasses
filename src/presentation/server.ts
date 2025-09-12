@@ -1,5 +1,4 @@
 import express, { Router } from 'express';
-import cors from 'cors';
 
 import { AppRoutes } from './routes';
 import {Request, Response} from 'express'
@@ -24,21 +23,7 @@ export class Server {
 
   async start(){
 
-    //* CORS Configuration
-    const corsOptions = {
-      origin: [
-        'http://abogadosinternacionales.com.mx',
-        'https://abogadosinternacionales.com.mx',
-        'http://localhost:3000',
-        'http://localhost:5173'
-      ],
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization']
-    };
-
     //* Middlewares
-    this.app.use(cors(corsOptions));
     this.app.use( express.json() ); 
     this.app.use( express.urlencoded({ extended: true })); 
     this.app.use(this.routes);
