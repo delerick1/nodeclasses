@@ -1,4 +1,4 @@
-export class CustomError extends Error{
+export class  extends Error{
 
     constructor( 
         public readonly message: string,
