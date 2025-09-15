@@ -1,14 +1,12 @@
 import express, { Router } from 'express';
 
-import { AppRoutes } from './routes';
-import {Request, Response} from 'express'
-
+//import { AppRoutes } from './routes';
+//import {Request, Response} from 'express'
 interface Options {
   port: number;
   routes: Router;
 
 }
-
 export class Server {
 
   public readonly app = express();

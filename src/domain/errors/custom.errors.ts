@@ -11,10 +11,13 @@ export class CutomError extends Error{
         return new CustomError(message, 400)
         }
         static unAuthorized(message: string){
-            return new CustomError(message, 400)
+            return new CustomError(message, 401)
             }
             static notFound(message: string){
-                return new CustomError(message, 400)
+                return new CustomError(message, 404)
                 }
+                static InternalServer(message: string){
+                    return new CustomError(message, 500)
+                    }
     
 }
