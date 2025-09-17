@@ -1,25 +1,26 @@
 import { Any } from 'typeorm';
 import { Videogame } from '../../data';
-import { CustomError} from '../../domain';
+import { CreateVideogameDto, CustomError} from '../../domain';
 enum Status {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE',
 }
 export class VideogameService {
   constructor() { }
-
-  //ANY  Change type of data entry to any
-  async createVideogame(videogameData: any) {
+// todo-tree
+  /*
+ TODO ANY  Change type of data entry to any
+  */
+  async createVideogame(videogameData: CreateVideogameDto) {
     const videogame = new Videogame();
+
     videogame.title = videogameData.name.toLowerCase().trim();
     videogame.description = videogameData.description.toLowerCase().trim();
     videogame.price = videogameData.price;
     try {
-      console.log(videogameData)
       return await videogame.save();
     } catch (error: any) {
       throw CustomError.InternalServer("🧨🧨Somenthing went very wrong 🧨🧨 ")
-      console.log(error)//Todo: error
     }
   }
   async findAllVideogames() {
@@ -28,10 +29,10 @@ export class VideogameService {
 
     } catch (error: any) {
       console.log(error)
+      throw CustomError.InternalServer("🧨🧨Somenthing went very wrong 🧨🧨 ")
     }
   }
   async findOneVideogameById(id: number) {
-    try {
       const videogame = await Videogame.findOne({
         where: {
           id: id,
@@ -39,30 +40,20 @@ export class VideogameService {
         }
       });
       if (!videogame) {
-        throw new Error('No game')
+        throw CustomError.notFound(`videogame with id ${id} not found`)
       }
       return videogame;
-
-    } catch (error: any) {
-      throw new Error('Internal Server Error')
-      console.log(error)
-
-    }
   }
   async updateVideogame(videogameData: any, id: number) {
     const videogame = await this.findOneVideogameById(id);
     videogame.description = videogameData.description.toLowerCase().trim();
     videogame.price = videogameData.price;
     try {
-      await videogame.save()
-      return videogame;
+      return await videogame.save()
     } catch (error) {
       console.log(error)
-      throw new Error('Internal Server Error')
-    }
-
-
-
+      throw CustomError.InternalServer("🧨🧨Somenthing went very wrong 🧨🧨 ")   
+     }
   }
   async deleteVideogame(id: number) {
     const videogame = await this.findOneVideogameById(id)
@@ -72,7 +63,7 @@ export class VideogameService {
       await videogame.save()
       return;
     } catch (error) {
-
+      throw CustomError.InternalServer("🧨🧨Somenthing went very wrong 🧨🧨 ")
     }
   }
 }

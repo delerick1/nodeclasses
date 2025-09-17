@@ -1,8 +1,9 @@
+//const customError = new CustomError('Not Found product', 404)
 export class CustomError extends Error{
 
     constructor( 
         public readonly message: string,
-        public readonly status: number
+        public readonly statusCode: number
     ){
     super(message)
     }
