@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { VideogameService } from '../services/videogame.service';
-import { CreateVideogameDto, CustomError } from '../../domain';
+import { CreateVideogameDto, CustomError, UpdateVideogameDto } from '../../domain';
 
 export class VideogamesController {
 
@@ -18,7 +18,7 @@ export class VideogamesController {
    const[error, createVideogameDto] = CreateVideogameDto.create(req.body)
    if(error) res.status(422).json({message:error})
 
-    this.videogameService.createVideogame(createVideogameDto)
+    this.videogameService.createVideogame(createVideogameDto!)
     .then(videogame => res.status(201).json(videogame))
     .catch((error: any) => this.handleError(error, res))
   };
@@ -40,13 +40,13 @@ export class VideogamesController {
 
   updateVideogamesByid = (req: Request, res: Response): void => {
     const { id } = req.params;
-    const { name, price, description } = req.body;
+    const [error, updateVideogameDto] = UpdateVideogameDto.create(req.body);
   
     if(isNaN(+id)){
     res.status(400).json({message: `Enter a number`});
     }
     
-    this.videogameService.updateVideogame({ name, price, description},+id)
+    this.videogameService.updateVideogame(updateVideogameDto!,+id)
     .then(videogame => res.status(200).json(videogame))
     .catch((error: any) => res.status(500).json(error))
   };

@@ -1,6 +1,6 @@
 import { Any } from 'typeorm';
 import { Videogame } from '../../data';
-import { CreateVideogameDto, CustomError} from '../../domain';
+import { CreateVideogameDto, CustomError, UpdateVideogameDto} from '../../domain';
 enum Status {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE',
@@ -44,9 +44,9 @@ export class VideogameService {
       }
       return videogame;
   }
-  async updateVideogame(videogameData: any, id: number) {
+  async updateVideogame(videogameData: UpdateVideogameDto, id: number) {
     const videogame = await this.findOneVideogameById(id);
-    videogame.description = videogameData.description.toLowerCase().trim();
+    videogame.title = videogameData.name.toLowerCase().trim();
     videogame.price = videogameData.price;
     try {
       return await videogame.save()

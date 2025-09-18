@@ -14,13 +14,15 @@ example {
     "description": "juego de amazon "
 }
     */
-
+//TODO
     static create(object: { [key: string]: any }): [string?, CreateVideogameDto?] {
         const { name, price, description } = object;
         if (!name) return ['Missing name', undefined]
         if (!price) return ['Missing price']
         if (price < 0) return ['Price must be positive']
         if (!description) return ['Missing description']
+        if (description.length < 10) return ['Description must be at least 10 characteres']
+
         
         return [undefined, new CreateVideogameDto(name, price, description)]
     }
