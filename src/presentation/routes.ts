@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {VideogamesRoutes} from './videogames/routes'
+import { AuthRoutes } from './auth/routes';
 
 export class AppRoutes {
   // STATIC 
@@ -9,7 +10,7 @@ export class AppRoutes {
     router.use('/api/v1/videogames', VideogamesRoutes.routes);
     //* aca tambien iran todos los metodos que necesitamos para gestionar los videojuegos
 
-    //* aca tambien iran todos los metodos que necesitamos para gestionar los los usuarios
+    router.use('/api/v1/auth', AuthRoutes.routes);
 
     //* aca tambien iran todos los metodos que necesitamos para gestionar los los purchases
 

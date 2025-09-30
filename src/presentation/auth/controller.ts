@@ -1,5 +1,5 @@
 import { CustomError } from "../../domain"
-
+import { Request, Response } from "express"
 export class AuthController{
     constructor(
 //TODO: Do Dependency injection if is required
@@ -11,7 +11,11 @@ export class AuthController{
         console.log(error)
         return res.status(500).json({message:'Something went wrong!'})
     }
-    methodeName = (req: Request, res: Response)=>{
+    register = (req: Request, res: Response)=>{
+        //TODO: implementar el metodo 
+        return res.status(200).json({message: 'Hello World'})
+    }
+    login = (req: Request, res: Response)=>{
         //TODO: implementar el metodo 
         return res.status(200).json({message: 'Hello World'})
     }
