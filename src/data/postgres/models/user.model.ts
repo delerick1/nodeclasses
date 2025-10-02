@@ -47,4 +47,22 @@ export class User extends BaseEntity {
     type: 'varchar',
     length: 60,
     nullable: false
+  })
+  role: Role;
+  @Column({
+enum: Role,
+    type: 'enum' ,
+default:Role.CLIENT
+  })
+  status: Status;
+  @Column({
+    enum: Status,
+        type: 'enum' ,
+    default:Status.ACTIVE
       })
+
+      @CreateDateColumn()
+      create_at: Date;
+      @UpdateDateColumn()
+      update_at: Date
+    }

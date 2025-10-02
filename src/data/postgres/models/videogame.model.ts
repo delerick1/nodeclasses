@@ -69,6 +69,11 @@ export class Videogame extends BaseEntity {
   })
 
   status: Status;
+  @Column({
+    enum: Status,
+        type: 'enum' ,
+    default:Status.ACTIVE
+      })
 
   @CreateDateColumn()
 
