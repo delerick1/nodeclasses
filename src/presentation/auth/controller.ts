@@ -11,12 +11,12 @@ export class AuthController{
         console.log(error)
         return res.status(500).json({message:'Something went wrong!'})
     }
-    register = (req: Request, res: Response)=>{
-        //TODO: implementar el metodo 
-        return res.status(200).json({message: 'Hello World'})
+    register = (req: Request, res: Response): void => {
+        //TODO: implementar el metodo
+        res.status(200).json({message: 'Hello World'})
     }
-    login = (req: Request, res: Response)=>{
-        //TODO: implementar el metodo 
-        return res.status(200).json({message: 'Hello World'})
+    login = (req: Request, res: Response): void => {
+        //TODO: implementar el metodo
+        res.status(200).json({message: 'Hello World'})
     }
 }
